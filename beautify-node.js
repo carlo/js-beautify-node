@@ -28,7 +28,6 @@ or working for you.
 */
 
 
-require.paths.unshift( "./" );
 
 
 ( function() {
