@@ -28,8 +28,6 @@ or working for you.
 */
 
 
-require.paths.unshift( "./" );
-
 
 ( function() {
   
@@ -37,7 +35,7 @@ require.paths.unshift( "./" );
     sys = require( "sys" ),
     http = require( "http" ),
     url = require( "url" ),
-    jsb = require( "beautify" ),
+    jsb = require( "./beautify" ),
     options,
     result = "";
 
