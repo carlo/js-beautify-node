@@ -1,3 +1,4 @@
+#!/usr/bin/env node
 /*jslint adsafe: false, bitwise: true, browser: true, cap: false, css: false,
   debug: false, devel: true, eqeqeq: true, es5: false, evil: true,
   forin: false, fragment: false, immed: true, laxbreak: false, newcap: true,
@@ -28,7 +29,6 @@ or working for you.
 */
 
 
-require.paths.unshift( "./" );
 
 
 ( function() {
@@ -37,14 +37,14 @@ require.paths.unshift( "./" );
     sys = require( "sys" ),
     http = require( "http" ),
     url = require( "url" ),
-    jsb = require( "beautify" ),
+    jsb = require( "./beautify.js" ),
     options,
     result = "";
 
 
   function printUsage() {
     sys.puts( [
-      "Usage: node beautify-node.js [options] [file || URL || STDIN]",
+      "Usage: jsbeautify [options] [file || URL || STDIN]",
       "",
       "Reads from standard input if no file or URL is specified.",
       "",
