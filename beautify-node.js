@@ -37,6 +37,7 @@ require.paths.unshift( "./" );
     sys = require( "sys" ),
     http = require( "http" ),
     url = require( "url" ),
+    tty = require( "tty" ),
     jsb = require( "beautify" ),
     options,
     result = "";
@@ -183,22 +184,7 @@ require.paths.unshift( "./" );
         beautifySource( sourceFile );
       }
     }
-    else {
-
-      // I'll be honest: I don't know yet how to check whether there is any
-      // STDIN or not.  When the script is called w/o parameters, it should
-      // print out usage information; when there's STDIN input, it should
-      // process that.  So I figured that when there's no such input within 
-      // 25ms, there won't be anything later on, either.  If you know of a 
-      // cleaner way to do this, please let me know.  :)  --Carlo
-      
-      setTimeout( function() {
-        if ( sourceFile.length === 0 ) {
-          printUsage();
-          process.exit( 1 );
-        }
-      }, 25 );
-
+    else if ( ! tty.isatty( process.stdin ) ) {
       stdin = process.openStdin();
       stdin.setEncoding( "utf8" );
       stdin
@@ -208,6 +194,9 @@ require.paths.unshift( "./" );
         .on( "end", function() {          
           beautifySource( sourceFile );
         });
+    } else {
+      printUsage();
+      process.exit( 1 );
     }
   }
 
